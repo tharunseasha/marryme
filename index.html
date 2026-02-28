@@ -1,53 +1,126 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Important Question</title>
+<title>Important Question 💍</title>
+
 <style>
   body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fad0c4, #ffdde1);
+    overflow: hidden;
+  }
+
+  .container {
     text-align: center;
-    font-family: Arial;
-    margin-top: 100px;
-    background: #ffe6f0;
+    background: rgba(255,255,255,0.2);
+    padding: 40px 60px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 25px rgba(0,0,0,0.2);
   }
 
   h1 {
-    font-size: 40px;
+    font-size: 42px;
+    color: #ffffff;
+    text-shadow: 0 0 10px #ff4da6;
+    margin-bottom: 30px;
   }
 
   button {
     font-size: 20px;
-    padding: 12px 25px;
-    margin: 20px;
+    padding: 12px 30px;
+    margin: 15px;
+    border-radius: 30px;
+    border: none;
     cursor: pointer;
-    border-radius: 10px;
+    transition: 0.3s;
+  }
+
+  #yesBtn {
+    background: linear-gradient(45deg, #ff4da6, #ff0066);
+    color: white;
+    box-shadow: 0 0 15px #ff4da6;
+  }
+
+  #yesBtn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 30px #ff0066;
   }
 
   #noBtn {
+    background: linear-gradient(45deg, #666, #333);
+    color: white;
     position: absolute;
+  }
+
+  /* floating hearts */
+  .heart {
+    position: absolute;
+    color: rgba(255,255,255,0.7);
+    font-size: 20px;
+    animation: float 6s linear infinite;
+  }
+
+  @keyframes float {
+    from {
+      transform: translateY(100vh);
+      opacity: 1;
+    }
+    to {
+      transform: translateY(-10vh);
+      opacity: 0;
+    }
   }
 </style>
 </head>
 
 <body>
 
-<h1>Will you marry Tharun? 💍</h1>
-
-<button onclick="yesClicked()">Yes ❤️</button>
-<button id="noBtn">No 😢</button>
+<div class="container">
+  <h1>Will you marry Tharun? 💍❤️</h1>
+  <button id="yesBtn" onclick="yesClicked()">Yes ❤️</button>
+  <button id="noBtn">No 😢</button>
+</div>
 
 <script>
 function yesClicked() {
-  alert("Yay! I knew it. You dont have an option 😍");
+  alert("Yay! I knew it 😍❤️");
 }
 
+/* moving No button */
 const noBtn = document.getElementById("noBtn");
 
-noBtn.addEventListener("mouseover", () => {
-  const x = Math.random() * (window.innerWidth - 100);
-  const y = Math.random() * (window.innerHeight - 50);
+noBtn.addEventListener("mouseenter", function () {
+  const maxX = window.innerWidth - noBtn.offsetWidth;
+  const maxY = window.innerHeight - noBtn.offsetHeight;
+
+  const x = Math.random() * maxX;
+  const y = Math.random() * maxY;
+
   noBtn.style.left = x + "px";
   noBtn.style.top = y + "px";
 });
+
+/* floating hearts generator */
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "❤️";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = (Math.random() * 20 + 15) + "px";
+  heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+
+  document.body.appendChild(heart);
+
+  setTimeout(() => heart.remove(), 6000);
+}
+
+setInterval(createHeart, 300);
 </script>
 
 </body>
