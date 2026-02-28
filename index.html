@@ -11,13 +11,13 @@
     justify-content: center;
     align-items: center;
     font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fad0c4, #ffdde1);
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4, #ffdde1);
     overflow: hidden;
   }
 
   .container {
     text-align: center;
-    background: rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.25);
     padding: 40px 60px;
     border-radius: 20px;
     backdrop-filter: blur(10px);
@@ -25,10 +25,16 @@
   }
 
   h1 {
-    font-size: 42px;
-    color: #ffffff;
+    font-size: 38px;
+    color: white;
     text-shadow: 0 0 10px #ff4da6;
-    margin-bottom: 30px;
+  }
+
+  #message {
+    font-size: 20px;
+    color: #fff;
+    margin-top: 15px;
+    min-height: 30px;
   }
 
   button {
@@ -49,32 +55,12 @@
 
   #yesBtn:hover {
     transform: scale(1.1);
-    box-shadow: 0 0 30px #ff0066;
   }
 
   #noBtn {
     background: linear-gradient(45deg, #666, #333);
     color: white;
     position: absolute;
-  }
-
-  /* floating hearts */
-  .heart {
-    position: absolute;
-    color: rgba(255,255,255,0.7);
-    font-size: 20px;
-    animation: float 6s linear infinite;
-  }
-
-  @keyframes float {
-    from {
-      transform: translateY(100vh);
-      opacity: 1;
-    }
-    to {
-      transform: translateY(-10vh);
-      opacity: 0;
-    }
   }
 </style>
 </head>
@@ -83,19 +69,142 @@
 
 <div class="container">
   <h1>Will you marry Tharun? 💍❤️</h1>
+  <div id="message"></div>
   <button id="yesBtn" onclick="yesClicked()">Yes ❤️</button>
   <button id="noBtn">No 😢</button>
 </div>
 
 <script>
+
 function yesClicked() {
-  alert("Yay! I knew it 😍❤️");
+  alert("Yay! Best decision ever ❤️😍");
 }
 
-/* moving No button */
-const noBtn = document.getElementById("noBtn");
+/* 100 messages */
+const messages = [
+"Tharun is a great person, still you want to say no? 🥺",
+"He will always care for you ❤️",
+"He will make you smile every day 😊",
+"He will support your dreams ✨",
+"He will stand beside you forever 🤝",
+"Are you really sure? 😢",
+"He has a kind heart 💖",
+"He will respect you always 🙏",
+"He will never leave your side 🌹",
+"He will protect your happiness 🛡️",
+"You mean a lot to him 💕",
+"He believes in true love ❤️",
+"He will listen to you always 👂",
+"He will be your best friend 🥰",
+"He will value every moment with you ⏳",
+"He will make your life colorful 🌈",
+"He will never hurt you 💞",
+"He will stand in tough times 💪",
+"He will celebrate your success 🎉",
+"He will motivate you 🚀",
 
-noBtn.addEventListener("mouseenter", function () {
+"He will bring you coffee ☕",
+"He will travel with you ✈️",
+"He will laugh with you 😂",
+"He will cry with you 😢",
+"He will grow old with you 👵👴",
+"He will hold your hand 🤝",
+"He will understand you 🧠",
+"He will trust you 🔐",
+"He will cherish you 🌸",
+"He will prioritize you ⭐",
+
+"You are very important to him 💎",
+"He will make memories 📸",
+"He will be loyal 🐾",
+"He will care deeply ❤️",
+"He will be honest 🤍",
+"He will support always 🙌",
+"He will love endlessly ♾️",
+"He will respect your space 🌌",
+"He will admire you 😍",
+"He will stay forever 🏡",
+
+"Think again 🥺",
+"Still no? 😔",
+"Are you 100% sure? 😢",
+"He is waiting ❤️",
+"He truly cares 💕",
+"He is serious 💍",
+"He believes in you 🌟",
+"He wants forever ♾️",
+"He values you 💖",
+"He loves you ❤️",
+
+"Don't break his heart 💔",
+"He will protect you 🛡️",
+"He will encourage you 🌱",
+"He will trust you 🤝",
+"He will smile for you 😊",
+"He will sacrifice for you 🙏",
+"He will grow with you 🌳",
+"He will learn with you 📚",
+"He will celebrate you 🎊",
+"He will respect always 🙌",
+
+"Still pressing No? 😭",
+"He deserves a chance ❤️",
+"He is genuine 🤍",
+"He is loyal 💕",
+"He is caring 💖",
+"He is loving ❤️",
+"He is kind 🌸",
+"He is supportive 🌟",
+"He is honest 💎",
+"He is respectful 🙏",
+
+"Are you sure sure sure? 😢",
+"He will never give up 💪",
+"He will wait ❤️",
+"He will hope 🌈",
+"He will dream 💭",
+"He will believe ✨",
+"He will smile 😊",
+"He will protect 💞",
+"He will stand 🤝",
+"He will love ❤️",
+
+"Think once more 🥺",
+"Think twice 😢",
+"Think thrice 😭",
+"He loves you ❤️",
+"He really loves you 💕",
+"He truly loves you 💖",
+"He deeply loves you ❤️",
+"He honestly loves you 💞",
+"He endlessly loves you ♾️",
+"Last chance 😢",
+"Still no? 💔",
+"Please reconsider 🥺",
+"He is Tharun ❤️",
+"He is special 💎",
+"He is yours ❤️",
+"Final warning 😄",
+"Are you really sure? 😢",
+"He is waiting forever ❤️",
+"This button will keep running 😂",
+"You cannot escape destiny 💍"
+];
+
+let msgIndex = 0;
+
+const noBtn = document.getElementById("noBtn");
+const msgBox = document.getElementById("message");
+
+noBtn.addEventListener("click", function () {
+
+  msgBox.innerText = messages[msgIndex];
+
+  msgIndex++;
+  if (msgIndex >= messages.length) {
+    msgIndex = 0;
+  }
+
   const maxX = window.innerWidth - noBtn.offsetWidth;
   const maxY = window.innerHeight - noBtn.offsetHeight;
 
@@ -106,21 +215,6 @@ noBtn.addEventListener("mouseenter", function () {
   noBtn.style.top = y + "px";
 });
 
-/* floating hearts generator */
-function createHeart() {
-  const heart = document.createElement("div");
-  heart.className = "heart";
-  heart.innerHTML = "❤️";
-  heart.style.left = Math.random() * 100 + "vw";
-  heart.style.fontSize = (Math.random() * 20 + 15) + "px";
-  heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
-
-  document.body.appendChild(heart);
-
-  setTimeout(() => heart.remove(), 6000);
-}
-
-setInterval(createHeart, 300);
 </script>
 
 </body>
